@@ -1,0 +1,21 @@
+# Local configuration & credentials (JANGAN DI-COMMIT)
+config/db.php
+identity.php
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary & logs
+*.log
+tmp/

@@ -1,0 +1,436 @@
+/**
+ * ============================================================================
+ * members/m0/style.css — Styling Bersih & Modern dengan CSS Variables
+ * ============================================================================
+ *
+ * 💡 PRINSIP CSS BERSIH:
+ * 1. Design Tokens (:root): Palet warna terpusat untuk kemudahan kustomisasi & Dark Mode.
+ * 2. Mobile-First & Fluid Layout: Tampilan responsif menggunakan Flexbox & CSS Grid.
+ * 3. BEM-like Scope: Prefix 'm0-' digunakan agar CSS tidak bertabrakan dengan anggota lain.
+ */
+
+/* ------------------------------------------------------------------------- */
+/* 1. DESIGN TOKENS (Variabel Warna & Spacing)                               */
+/* ------------------------------------------------------------------------- */
+:root {
+    --bg-page: #f8fafc;
+    --bg-card: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --primary-light: rgba(37, 99, 235, 0.08);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+    --radius: 8px;
+}
+
+/* Palet Warna Saat Dark Mode Aktif */
+[data-theme="dark"] {
+    --bg-page: #0b0f19;
+    --bg-card: #151d2f;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border-color: #24324d;
+    --primary: #3b82f6;
+    --primary-hover: #60a5fa;
+    --primary-light: rgba(59, 130, 246, 0.15);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+}
+
+/* ------------------------------------------------------------------------- */
+/* 2. BASE RESET & TYPOGRAPHY                                                */
+/* ------------------------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.m0-container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+/* ------------------------------------------------------------------------- */
+/* 3. HEADER & NAVIGASI                                                      */
+/* ------------------------------------------------------------------------- */
+.m0-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0 2rem 0;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.m0-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.m0-route-badge {
+    background: var(--primary);
+    color: #ffffff;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.m0-brand-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+.m0-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.m0-nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.m0-nav a:hover {
+    color: var(--primary);
+}
+
+.m0-nav-btn {
+    padding: 0.35rem 0.75rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    color: var(--text-main) !important;
+    font-weight: 600 !important;
+}
+
+.m0-theme-toggle {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 0.35rem 0.65rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+/* ------------------------------------------------------------------------- */
+/* 4. HERO SECTION                                                           */
+/* ------------------------------------------------------------------------- */
+.m0-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3.5rem 0;
+    gap: 2.5rem;
+    flex-wrap: wrap-reverse;
+}
+
+.m0-hero-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.m0-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.m0-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+}
+
+.m0-nim {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+}
+
+.m0-headline {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+}
+
+.m0-bio {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    max-width: 580px;
+}
+
+.m0-hero-cta {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.m0-btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.m0-btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+.m0-btn-secondary {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.m0-hero-avatar img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--bg-card);
+    box-shadow: var(--shadow-md);
+}
+
+/* ------------------------------------------------------------------------- */
+/* 5. CONTENT SECTIONS                                                       */
+/* ------------------------------------------------------------------------- */
+.m0-section {
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.m0-section-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.m0-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.m0-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.m0-card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    color: var(--primary);
+}
+
+.m0-list {
+    list-style: none;
+}
+
+.m0-list li {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.m0-text-muted {
+    color: var(--text-muted);
+}
+
+.m0-tags-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.m0-tag {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 0.4rem 0.85rem;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* ------------------------------------------------------------------------- */
+/* 6. PORTOFOLIO GRID & FILTER                                               */
+/* ------------------------------------------------------------------------- */
+.m0-section-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.m0-filter-bar {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.m0-filter-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.m0-filter-btn.active {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
+
+.m0-portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.m0-portfolio-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.m0-portfolio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.m0-portfolio-thumb {
+    height: 150px;
+    background: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.m0-portfolio-thumb img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.m0-portfolio-body {
+    padding: 1.25rem;
+}
+
+.m0-portfolio-period {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.m0-portfolio-body h3 {
+    margin: 0.25rem 0 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.m0-portfolio-body p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.m0-portfolio-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.m0-portfolio-tags span {
+    font-size: 0.75rem;
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* ------------------------------------------------------------------------- */
+/* 7. KONTAK & FOOTER                                                        */
+/* ------------------------------------------------------------------------- */
+.m0-contact-grid {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.m0-contact-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius);
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.m0-contact-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.m0-footer {
+    padding: 2.5rem 0 1rem 0;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 0.85rem;
+}
