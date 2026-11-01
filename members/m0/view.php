@@ -37,7 +37,7 @@ $portofolio = [
         'judul'    => 'TJAHAYABIZ',
         'kategori' => 'backend',
         'periode'  => 'Sep 2024 – Mei 2025',
-        'gambar'   => 'members/m0/assets/tjahayabiz.svg',
+        'gambar'   => 'members/m0/assets/dashboard_tjahayabiz.png',
         'ringkas'  => 'Sistem web B2B untuk CV Bukit Tjahaya: penjualan bahan bangunan, pemesanan, dan inventaris.',
         'detail'   => 'Merancang arsitektur RESTful API, skema basis data relasional, dan dashboard admin terpadu.',
         'tags'     => ['PHP', 'REST API', 'MySQL', 'B2B System'],
@@ -56,8 +56,8 @@ $portofolio = [
         'id'       => 3,
         'judul'    => 'Visual Web Development — PADMI Telkom University',
         'kategori' => 'web',
-        'periode'  => 'Sep 2024 – Feb 2025',
-        'gambar'   => 'members/m0/assets/padmi.svg',
+        'periode'  => 'Sep 2024 – Jan 2025',
+        'gambar'   => 'members/m0/assets/magang.jpeg',
         'ringkas'  => 'Pengembangan portal informasi admisi kampus Direktorat Pemasaran dan Admisi.',
         'detail'   => 'Mendukung pembaruan tampilan visual dan interaktivitas frontend portal informasi admisi on-site di Bandung.',
         'tags'     => ['Visual Web', 'Frontend', 'Telkom University'],
@@ -152,8 +152,8 @@ $portofolio = [
                                 <span class="m0-text-muted">Telkom University · 2025 – Sekarang</span>
                             </li>
                             <li>
-                                <strong>D3 Teknik Informatika</strong>
-                                <span class="m0-text-muted">Lulus</span>
+                                <strong>D3 Rekayasa Perangkat Lunak Aplikasi</strong>
+                                <span class="m0-text-muted">Telkom University · 2021 - 2025</span>
                             </li>
                         </ul>
                     </article>
@@ -163,11 +163,11 @@ $portofolio = [
                         <ul class="m0-list">
                             <li>
                                 <strong>Visual Web Developer Intern</strong>
-                                <span class="m0-text-muted">Direktorat Pemasaran & Admisi (PADMI) · 2024–2025</span>
+                                <span class="m0-text-muted">Direktorat Pemasaran & Admisi (PADMI) · 2024 Sep –2025 Jan</span>
                             </li>
                             <li>
                                 <strong>AI Evaluator & Quality Assurance</strong>
-                                <span class="m0-text-muted">Bilingual Model Evaluation · 2026</span>
+                                <span class="m0-text-muted">Bilingual Model Evaluation · 2026 Sep - 2026 Okt</span>
                             </li>
                         </ul>
                     </article>

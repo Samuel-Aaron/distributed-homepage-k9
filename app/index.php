@@ -3,9 +3,13 @@
  * app/index.php — Halaman Dashboard Utama Aplikasi Bersama (Penghitung Kunjungan)
  */
 
-$identityPath = dirname(__DIR__) . '/identity.php';
-if (file_exists($identityPath)) {
-    require_once $identityPath;
+require_once __DIR__ . '/lib/env.php';
+
+// Tetapkan identitas server fisik dari .env jika belum ada
+if (!defined('MEMBER_ROUTE')) {
+    define('MEMBER_ROUTE', env('MEMBER_ROUTE', 'm0'));
+    define('MEMBER_NAMA',  env('MEMBER_NAMA', 'Samuel Aaron'));
+    define('MEMBER_NIM',   env('MEMBER_NIM', '103012580024'));
 }
 
 require_once __DIR__ . '/lib/db.php';
@@ -148,7 +152,7 @@ if ($dbConnected) {
         <div class="card">
             <h3 style="font-size: 1rem; color: #0f172a; margin-bottom: 0.75rem;">Status Pengerjaan Modul Bersama</h3>
             <p style="font-size: 0.9rem; font-weight: normal; color: #475569; line-height: 1.6;">
-                Kerangka aplikasi telah siap. Modul Form Check-in, Paginasi Riwayat, dan Visualisasi Grafik akan dikembangkan pada task berikutnya melalui Pull Request.
+                Kerangka aplikasi telah beralih ke <strong>Pure .env</strong>. Modul Form Check-in, Paginasi Riwayat, dan Visualisasi Grafik akan dikembangkan pada task berikutnya melalui Pull Request.
             </p>
         </div>
     </div>

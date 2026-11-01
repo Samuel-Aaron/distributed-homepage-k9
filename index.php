@@ -3,7 +3,7 @@
  * index.php — Gateway & Failover Router Personal Page.
  *
  * Alur Kerja:
- * 1. Membaca identitas server dari 'identity.php' lokal (jika ada).
+ * 1. Membaca identitas server secara murni dari .env (MEMBER_ROUTE, MEMBER_NAMA, MEMBER_NIM).
  * 2. Menentukan profil anggota mana yang harus ditampilkan:
  *    - Default: menampilkan profil milik server ini (misal m0).
  *    - Failover: jika ada parameter ?member=m[x], menampilkan profil anggota tersebut.
@@ -11,18 +11,17 @@
  *    dilayani secara langsung atau dilayani oleh server cadangan (failover).
  */
 
-// 1. Muat identitas server fisik
-$identityFile = __DIR__ . '/identity.php';
-if (file_exists($identityFile)) {
-    require_once $identityFile;
-} else {
-    // Default fallback jika identity.php belum disalin oleh anggota
-    define('MEMBER_ROUTE', 'm0');
-    define('MEMBER_NAMA',  'Samuel Aaron');
-    define('MEMBER_NIM',   '103012580024');
+// 1. Muat loader konfigurasi .env
+require_once __DIR__ . '/app/lib/env.php';
+
+// 2. Tetapkan identitas server fisik dari .env
+if (!defined('MEMBER_ROUTE')) {
+    define('MEMBER_ROUTE', env('MEMBER_ROUTE', 'm0'));
+    define('MEMBER_NAMA',  env('MEMBER_NAMA', 'Samuel Aaron'));
+    define('MEMBER_NIM',   env('MEMBER_NIM', '103012580024'));
 }
 
-// 2. Tentukan target member yang ingin diakses
+// 3. Tentukan target member yang ingin diakses
 $defaultRoute = defined('MEMBER_ROUTE') ? MEMBER_ROUTE : 'm0';
 $targetMember = $_GET['member'] ?? $defaultRoute;
 
@@ -35,7 +34,7 @@ if (!in_array($targetMember, $validRoutes, true)) {
 // Variabel untuk dibaca oleh partials/served_by.php dan partials/node_nav.php
 $activeMember = $targetMember;
 
-// 3. Muat file view profil anggota
+// 4. Muat file view profil anggota
 $memberView = __DIR__ . "/members/{$targetMember}/view.php";
 
 if (file_exists($memberView)) {

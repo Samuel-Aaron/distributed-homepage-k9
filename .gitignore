@@ -1,13 +1,18 @@
-# Local configuration & credentials (JANGAN DI-COMMIT)
+# ==============================================================================
+# .gitignore — Aturan Pengabaian Berkas Git Kelompok 9
+# ==============================================================================
+
+# 1. Environment & Credentials (SANGAT RAHASIA - JANGAN DI-COMMIT)
+.env
 config/db.php
 identity.php
 
-# Operating System Files
+# 2. Operating System Files
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# IDE & Editor
+# 3. IDE & Code Editor
 .vscode/
 .idea/
 *.suo
@@ -16,6 +21,6 @@ desktop.ini
 *.sln
 *.sw?
 
-# Temporary & logs
+# 4. Logs & Temporary
 *.log
 tmp/

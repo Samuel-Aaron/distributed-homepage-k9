@@ -1,6 +1,6 @@
 # Homepage Lokal & Penghitung Kunjungan Terdistribusi
 
-Proyek ini dibangun untuk memenuhi tugas **Tugas 1 Komputasi Awan (Pra-UTS)**: Personal Page dan Aplikasi Terdistribusi dengan toleransi kesalahan (*fault tolerance*) dan replikasi multi-node.
+Proyek ini dibangun untuk memenuhi tugas **Tugas 1 Komputasi Awan (Pra-UTS)**: Personal Page dan Aplikasi Terdistribusi dengan toleransi kesalahan (*fault tolerance*) dan replikasi multi-node. Menggunakan arsitektur konfigurasi modern **Pure .env**.
 
 ---
 
@@ -32,19 +32,20 @@ git clone <URL-REPO-GITHUB> personal
 cd personal
 ```
 
-### 2. Atur Identitas Lokal (`identity.php`)
-Salin file template:
+### 2. Konfigurasi Lingkungan (`.env`)
+Salin file template `.env.example` menjadi `.env`:
 ```bash
-copy identity.example.php identity.php
+copy .env.example .env
 ```
-Buka file `identity.php`, lalu sesuaikan `MEMBER_ROUTE`, `MEMBER_NAMA`, dan `MEMBER_NIM` milik Anda. *(File ini tidak akan ter-commit ke Git)*.
+Buka file `.env`, lalu sesuaikan nilainya:
+* `MEMBER_ROUTE`: `m1` (sesuai route anggota Anda).
+* `MEMBER_NAMA`: Nama lengkap Anda.
+* `MEMBER_NIM`: NIM Anda.
+* `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`: Kredensial database lokal Anda.
 
-### 3. Atur Kredensial Database Lokal (`config/db.php`)
-```bash
-copy config\db.example.php config\db.php
-```
+*(Catatan: File `.env` bersifat lokal dan dilindungi oleh `.gitignore` sehingga tidak akan bocor ke GitHub).*
 
-### 4. Setup Database MySQL di phpMyAdmin
+### 3. Setup Database MySQL di phpMyAdmin
 1. Buka `http://localhost/phpmyadmin/`.
 2. Klik tab **Import** → pilih file `app/sql/schema.sql` → klik **Go**.
 3. Di tab **SQL**, jalankan query pembuatan user aplikasi:
@@ -54,6 +55,6 @@ copy config\db.example.php config\db.php
    FLUSH PRIVILEGES;
    ```
 
-### 5. Akses Melalui Browser
+### 4. Akses Melalui Browser
 * Homepage Personal: `http://localhost/personal/`
 * Dashboard Aplikasi Bersama: `http://localhost/personal/app/`
