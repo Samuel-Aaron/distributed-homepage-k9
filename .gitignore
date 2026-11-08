@@ -24,3 +24,7 @@ desktop.ini
 # 4. Logs & Temporary
 *.log
 tmp/
+
+# Antrean kunjungan bersifat lokal per node dan tidak boleh masuk Git.
+app/storage/*
+!app/storage/.htaccess

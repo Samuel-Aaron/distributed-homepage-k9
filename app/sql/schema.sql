@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS anggota (
 -- 2. Tabel Log Kunjungan & Check-in
 CREATE TABLE IF NOT EXISTS kunjungan (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    event_id CHAR(32) NULL,                  -- ID stabil untuk deduplikasi sinkronisasi offline
     route_id VARCHAR(10) NOT NULL,            -- Server fisik yang melayani (m0..m3)
     target_member VARCHAR(10) NOT NULL,       -- Halaman anggota yang dikunjungi (m0..m3)
     is_failover TINYINT(1) DEFAULT 0,         -- 1 jika dilayani sebagai server cadangan
@@ -28,6 +29,7 @@ CREATE TABLE IF NOT EXISTS kunjungan (
     ip_hash CHAR(64) NOT NULL,                -- Hash SHA-256 IP (privasi)
     user_agent VARCHAR(255) NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_kunjungan_event (event_id),
     INDEX idx_route (route_id),
     INDEX idx_target (target_member),
     INDEX idx_created (created_at),

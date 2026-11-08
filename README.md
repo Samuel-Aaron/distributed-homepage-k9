@@ -64,3 +64,64 @@ Kode berada di `members/m1/view.php`, `style.css`, `main.js`, dan `images/`.
 Interaksi JavaScript: lightbox gambar portofolio dan penanda navigasi aktif sesuai bagian yang dipilih.
 Untuk menjadikan m1 halaman default node lokal, isi `.env` dengan `MEMBER_ROUTE=m1`,
 `MEMBER_NAMA="Marthin Tambunan"`, dan `MEMBER_NIM=103012580055`.
+
+## T-08: buffer offline dan sinkronisasi
+
+Setiap kunjungan GET ke profil atau dashboard ditulis dahulu ke
+`app/storage/pending_sync.json` pada node yang melayani. Jika database tersedia,
+request yang sama mengirim seluruh antrean dengan INSERT multi-baris, maksimal
+100 kunjungan per statement dalam satu transaksi. Jika database gagal, profil
+tetap tampil dan antrean dipertahankan.
+
+Sinkronisasi otomatis dipicu oleh kunjungan GET berikutnya setelah database pulih,
+bukan oleh worker latar belakang. Tanpa request baru, antrean tetap menunggu.
+`event_id` unik mencegah duplikasi jika proses terhenti setelah COMMIT tetapi
+sebelum antrean dikosongkan. Waktu kunjungan asli, server asal, profil tujuan,
+status failover, dan hash IP tetap dipertahankan.
+
+### Instalasi pada database yang sudah ada
+
+1. Pada phpMyAdmin database pusat, jalankan **satu kali** file
+   `app/sql/migrations/008_offline_sync.sql` memakai akun administrator.
+   Migrasi menambah kolom nullable `event_id` dan indeks unik; data lama tidak
+   dihapus. Akun aplikasi tetap memakai hak SELECT/INSERT/UPDATE/DELETE.
+2. Deploy kode T-08 ke semua node. Instalasi database baru cukup menggunakan
+   `app/sql/schema.sql`, yang sudah berisi kolom tersebut; jangan jalankan migrasi
+   lagi pada skema baru.
+3. Pastikan Apache/PHP dapat menulis ke direktori `app/storage/`, termasuk membuat
+   file sementara dan mengganti file antrean. Direktori ini harus berada pada
+   disk lokal masing-masing node, bukan folder jaringan bersama.
+4. Pastikan `DB_HOST` di `.env` hanya IP/hostname, tanpa `http://`, path, atau `/`
+   di akhir. Identitas `MEMBER_ROUTE` tetap milik node masing-masing.
+5. Uji URL `/app/storage/pending_sync.json` dari browser: harus ditolak dengan
+   403/404. `.htaccess` bawaan menolak seluruh akses storage pada Apache dengan
+   AllowOverride aktif. Pada server lain, buat aturan penolakan setara.
+
+Jangan hapus antrean, file `.lock`, atau mengganti direktori storage saat aplikasi
+sedang berjalan. Lock terpisah menyerialkan penulisan dan sinkronisasi; JSON diganti
+secara atomik. File runtime di storage diabaikan Git, sedangkan `.htaccess` tetap
+diikutsertakan. Tidak ada IP mentah di antrean; user-agent tetap disimpan.
+
+### Verifikasi dan batasan
+
+- Putuskan koneksi DB pada node percobaan, buka beberapa halaman, lalu periksa
+  antrean lokal. Pulihkan koneksi dan buka satu halaman: antrean menjadi `[]`,
+  sedangkan kunjungan lama dan baru muncul pada DB pusat tepat sekali.
+- Kegagalan SQL, termasuk migrasi yang belum dijalankan, mempertahankan antrean.
+  Kesalahan dicatat dengan prefix `[Offline Sync]` pada error log PHP.
+- Antrean rusak tidak ditimpa otomatis. Simpan salinan dan perbaiki penyebabnya;
+  kunjungan baru tidak dapat diterima selama antrean tidak dapat dibaca.
+- Disk penuh, izin tulis yang salah, kehilangan disk/laptop, dan kegagalan daya
+  tidak dijamin oleh buffer ini. Ini bukan replikasi atau failover database.
+  Antrean bertambah selama offline, sehingga ruang disk perlu dijaga.
+
+Regresi integrasi memakai MariaDB/MySQL nyata dan database acak khusus pengujian:
+
+```powershell
+C:\xampp\php\php.exe tests/offline_sync.php
+```
+
+Default pengujian: server lokal `127.0.0.1:3306`, user `root`, password kosong.
+Untuk server pengujian lain, gunakan variabel `T08_TEST_DSN` (tanpa `dbname`),
+`T08_TEST_USER`, dan `T08_TEST_PASS`. Akun uji memerlukan hak CREATE/DROP DATABASE.
+Pengujian tidak membaca `.env` dan tidak mengubah `kelompok_db`.
