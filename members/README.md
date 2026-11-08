@@ -42,3 +42,4 @@ members/
    - Styling CSS kustom dan responsif untuk mobile dan laptop.
 3. **File `main.js`:**
    - Minimal memuat 2 interaksi JavaScript (misalnya: Dark/Light Mode, Filter Portofolio, Modal Dialog, atau Animasi).
+    
