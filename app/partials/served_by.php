@@ -11,6 +11,12 @@ $serverNim     = defined('MEMBER_NIM')   ? MEMBER_NIM   : '-';
 
 $activeMember  = $activeMember ?? $currentServer;
 $isFailover    = ($activeMember !== $currentServer);
+
+// Path dasar aplikasi (mis. "/personal"), dihitung dari skrip yang sedang berjalan,
+// agar tautan dashboard tidak berlipat menjadi app/app saat sudah berada di /app/.
+$scriptName = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '/index.php');
+$basePath   = preg_match('#^(.*?)/app(?:/|$)#', $scriptName, $m) ? $m[1] : rtrim(dirname($scriptName), '/');
+$dashboardUrl = $basePath . '/app/';
 ?>
 <div class="served-by-banner <?= $isFailover ? 'banner-failover' : 'banner-normal' ?>">
     <div class="banner-container">
@@ -24,7 +30,7 @@ $isFailover    = ($activeMember !== $currentServer);
             <?php endif; ?>
         </div>
         <div class="banner-nav">
-            <a href="app/" class="banner-btn">📊 Dashboard Kunjungan</a>
+            <a href="<?= htmlspecialchars($dashboardUrl) ?>" class="banner-btn">📊 Dashboard Kunjungan</a>
         </div>
     </div>
 </div>

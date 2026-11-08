@@ -12,11 +12,13 @@ if (!defined('MEMBER_ROUTE')) {
     define('MEMBER_NIM',   env('MEMBER_NIM', '103012580024'));
 }
 
-require_once __DIR__ . '/lib/db.php';
-require_once __DIR__ . '/lib/helper.php';
+require_once __DIR__ . '/lib/kunjungan.php';
 
 $pdo = db();
 $dbConnected = ($pdo !== null);
+
+// T-02: catat kunjungan ke dashboard (target 'app')
+catat_kunjungan($pdo, 'app');
 
 // Inisialisasi awal log kunjungan jika ada tabel
 $stats = [

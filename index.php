@@ -38,6 +38,10 @@ $activeMember = $targetMember;
 $memberView = __DIR__ . "/members/{$targetMember}/view.php";
 
 if (file_exists($memberView)) {
+    // T-02: catat kunjungan otomatis (aman jika database mati)
+    require_once __DIR__ . '/app/lib/kunjungan.php';
+    catat_kunjungan(db(), $targetMember);
+
     require $memberView;
 } else {
     // Fallback darurat jika file anggota belum di-push
