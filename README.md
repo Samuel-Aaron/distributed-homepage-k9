@@ -17,7 +17,7 @@ Untuk melihat pembagian tugas, mengklaim fitur yang ingin dikerjakan, dan memant
 |---|---|---|---|---|
 | `m0` | Ketua | Samuel Aaron | `103012580024` | `members/m0/` |
 | `m1` | Anggota | Marthin Tambunan | `103012580055` | `members/m1/` |
-| `m2` | Anggota | *(TBD)* | `-` | `members/m2/` |
+| `m2` | Anggota | Akbar Saputra Hardian | `103012400193` | `members/m2/` |
 | `m3` | Anggota | *(TBD)* | `-` | `members/m3/` |
 
 ---

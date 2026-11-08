@@ -37,8 +37,8 @@ CREATE TABLE IF NOT EXISTS kunjungan (
 -- Data awal anggota kelompok (NIM & nama anggota m1-m3 dapat disesuaikan)
 INSERT INTO anggota (route_id, nim, nama) VALUES
   ('m0', '103012580024', 'Samuel Aaron'),
-  ('m1', '-', 'Anggota 1'),
-  ('m2', '-', 'Anggota 2'),
+  ('m1', '103012580055', 'Marthin Tambunan'),
+  ('m2', '103012400193', 'Akbar Saputra Hardian'),
   ('m3', '-', 'Anggota 3')
 ON DUPLICATE KEY UPDATE nim = VALUES(nim), nama = VALUES(nama);
 

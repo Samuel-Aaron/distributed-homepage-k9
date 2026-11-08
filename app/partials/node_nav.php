@@ -6,7 +6,7 @@
 $membersList = [
     'm0' => 'm0 · Samuel Aaron (Ketua)',
     'm1' => 'm1 · Marthin Tambunan',
-    'm2' => 'm2 · Anggota 2',
+    'm2' => 'm2 · Akbar Saputra Hardian',
     'm3' => 'm3 · Anggota 3',
 ];
 
