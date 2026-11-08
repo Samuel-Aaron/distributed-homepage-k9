@@ -11,7 +11,7 @@ Setiap anggota wajib menyelesaikan dan melakukan *push* halaman personalnya ke f
 | Route | Posisi | Nama Anggota | NIM | Status Halaman Personal |
 |---|---|---|---|---|
 | `m0` | Ketua | Samuel Aaron | `103012580024` | ✅ Selesai (`members/m0/`) |
-| `m1` | Anggota | *(Isi Nama)* | *(Isi NIM)* | ⏳ Belum Mulai (`members/m1/`) |
+| `m1` | Anggota | Marthin Tambunan | `103012580055` | ✅ Selesai (`members/m1/`) |
 | `m2` | Anggota | *(Isi Nama)* | *(Isi NIM)* | ⏳ Belum Mulai (`members/m2/`) |
 | `m3` | Anggota | *(Isi Nama)* | *(Isi NIM)* | ⏳ Belum Mulai (`members/m3/`) |
 

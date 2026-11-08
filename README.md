@@ -16,7 +16,7 @@ Untuk melihat pembagian tugas, mengklaim fitur yang ingin dikerjakan, dan memant
 | Route | Posisi | Nama | NIM | Folder Kerja |
 |---|---|---|---|---|
 | `m0` | Ketua | Samuel Aaron | `103012580024` | `members/m0/` |
-| `m1` | Anggota | *(TBD)* | `-` | `members/m1/` |
+| `m1` | Anggota | Marthin Tambunan | `103012580055` | `members/m1/` |
 | `m2` | Anggota | *(TBD)* | `-` | `members/m2/` |
 | `m3` | Anggota | *(TBD)* | `-` | `members/m3/` |
 
@@ -58,3 +58,9 @@ Buka file `.env`, lalu sesuaikan nilainya:
 ### 4. Akses Melalui Browser
 * Homepage Personal: `http://localhost/personal/`
 * Dashboard Aplikasi Bersama: `http://localhost/personal/app/`
+
+Halaman Marthin (m1) dapat dibuka melalui `?member=m1` pada URL utama proyek.
+Kode berada di `members/m1/view.php`, `style.css`, `main.js`, dan `images/`.
+Interaksi JavaScript: lightbox gambar portofolio dan penanda navigasi aktif sesuai bagian yang dipilih.
+Untuk menjadikan m1 halaman default node lokal, isi `.env` dengan `MEMBER_ROUTE=m1`,
+`MEMBER_NAMA="Marthin Tambunan"`, dan `MEMBER_NIM=103012580055`.
